@@ -53,5 +53,6 @@ app.use('/api/game-results', gameresults);
 // Set static folder for serving images
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-const port = process.env.PORT || 5000;
+
+const port = process.env.PORT || 5001;
 app.listen(port, () => console.log(`Server running on port ${port}`));

@@ -1,4 +1,4 @@
-const PersonalizedPhoto = require('../models/personalizedPhoto');
+const PersonalizedPhoto = require('../models/PersonalizedPhoto');
 
 // Create a new Personalized Photo
 exports.createPersonalizedPhoto = (req, res) => {

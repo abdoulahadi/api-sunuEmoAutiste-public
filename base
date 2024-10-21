@@ -1,0 +1,33 @@
+project-folder/
+│
+├── server.js                # Point d'entrée de l'application
+├── models/                  # Modèles de données Mongoose
+│   ├── Enfant.js
+│   ├── Jeu2D.js
+│   ├── MiniJeu3D.js
+│   ├── Emotion.js
+│   ├── SessionJeu2D.js
+│   ├── SessionMiniJeu3D.js
+│   └── Statistiques.js
+├── routes/                  # Routes API
+│   ├── enfant.js
+│   ├── jeu2d.js
+│   ├── minijeu3d.js
+│   ├── emotion.js
+│   ├── session2d.js
+│   ├── session3d.js
+│   └── stats.js
+├── controllers/             # Contrôleurs API
+│   ├── enfantController.js
+│   ├── jeu2dController.js
+│   ├── minijeu3dController.js
+│   ├── emotionController.js
+│   ├── session2dController.js
+│   ├── session3dController.js
+│   └── statsController.js
+├── config/                  # Configuration
+│   └── database.js
+└── utils/                   # Utilitaires divers
+
+username : diopcheikhabdoulahadmbackembacke
+password : oF3PNsBlGWFhEdS1

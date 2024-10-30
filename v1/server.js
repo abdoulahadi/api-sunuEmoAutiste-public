@@ -63,6 +63,7 @@ const jeu3intrus = require('./routes/jeu3intrus');
 const jeu4match = require('./routes/jeu4match');
 const gamesessions = require('./routes/gamesessions');
 const gameresults = require('./routes/gameresults');
+const adminUserRoutes = require('./routes/adminUsers');
 
 app.use('/api/users', users);
 app.use('/api/profiles', profiles);
@@ -77,6 +78,7 @@ app.use('/api/jeu3intrus', jeu3intrus);
 app.use('/api/jeu4match', jeu4match);
 app.use('/api/gamesessions', gamesessions);
 app.use('/api/game-results', gameresults);
+app.use('/api/admin-users', adminUserRoutes);
 
 
 // Set static folder for serving images

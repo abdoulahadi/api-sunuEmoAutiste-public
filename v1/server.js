@@ -4,6 +4,9 @@ const cors = require("cors");
 const connectDB = require('./config/database');
 const path = require('path');
 
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
 const app = express();
 
 // Connect to database
@@ -19,6 +22,32 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Body parser middleware
 app.use(bodyParser.json());
+
+const port = process.env.PORT || 5003;
+
+url = 'http://localhost:'+port
+
+const swaggerOptions = {
+    swaggerDefinition: {
+      openapi: '3.0.0',
+      info: {
+        title: 'Comprehensive Game and User Management API',
+        version: '1.0.0',
+        description: 'API pour gérer les jeux, utilisateurs, sessions, questions, images et profils',
+      },
+      servers: [
+        {
+          url: url,
+        },
+      ],
+    },
+    apis: ['./routes/*.js'], 
+  };
+
+  
+  const swaggerDocs = swaggerJsDoc(swaggerOptions);
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 
 // Routes
 const users = require('./routes/users');
@@ -54,5 +83,5 @@ app.use('/api/game-results', gameresults);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
-const port = process.env.PORT || 5001;
+
 app.listen(port, () => console.log(`Server running on port ${port}`));

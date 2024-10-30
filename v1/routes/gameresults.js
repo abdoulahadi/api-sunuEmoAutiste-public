@@ -2,46 +2,167 @@ const express = require('express');
 const router = express.Router();
 const gameResultController = require('../controllers/gameResultController');
 
-// Routes spécifiques d'abord
-// @route   GET api/game-results/aggregates
-// @desc    Obtenir les agrégats globaux et par utilisateur pour chaque jeu
-// @access  Public
+/**
+ * @swagger
+ * /api/game-results/aggregates:
+ *   get:
+ *     summary: Obtenir les agrégats globaux et par utilisateur pour chaque jeu
+ *     tags: [Game Results]
+ *     responses:
+ *       200:
+ *         description: Liste des agrégats globaux et par utilisateur
+ */
 router.get('/aggregates', gameResultController.getAggregates);
 
-// @route   GET api/game-results/aggregates/profile/:profileId
-// @desc    Obtenir les agrégats pour un utilisateur spécifique
-// @access  Public
+/**
+ * @swagger
+ * /api/game-results/aggregates/profile/{profileId}:
+ *   get:
+ *     summary: Obtenir les agrégats pour un utilisateur spécifique
+ *     tags: [Game Results]
+ *     parameters:
+ *       - in: path
+ *         name: profileId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID du profil utilisateur
+ *     responses:
+ *       200:
+ *         description: Agrégats pour un utilisateur spécifique
+ */
 router.get('/aggregates/profile/:profileId', gameResultController.getProfileAggregates);
 
-// @route   GET api/game-results/top-scores/:profileId/:gameId
-// @desc    Obtenir le top 3 des meilleurs scores pour chaque jeu
-// @access  Public
+/**
+ * @swagger
+ * /api/game-results/top-scores/{profileId}/{gameId}:
+ *   get:
+ *     summary: Obtenir le top 3 des meilleurs scores pour chaque jeu
+ *     tags: [Game Results]
+ *     parameters:
+ *       - in: path
+ *         name: profileId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID du profil utilisateur
+ *       - in: path
+ *         name: gameId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID du jeu
+ *     responses:
+ *       200:
+ *         description: Top 3 des meilleurs scores
+ */
 router.get('/top-scores/:profileId/:gameId', gameResultController.getTop3ScoresPerGame);
 
-// Routes génériques ensuite
-// @route   POST api/game-results
-// @desc    Créer un résultat de jeu
-// @access  Public
+/**
+ * @swagger
+ * /api/game-results:
+ *   post:
+ *     summary: Créer un résultat de jeu
+ *     tags: [Game Results]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               score:
+ *                 type: number
+ *               gameId:
+ *                 type: string
+ *               profileId:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Résultat de jeu créé
+ */
 router.post('/', gameResultController.createGameResult);
 
-// @route   GET api/game-results
-// @desc    Obtenir tous les résultats de jeu
-// @access  Public
+/**
+ * @swagger
+ * /api/game-results:
+ *   get:
+ *     summary: Obtenir tous les résultats de jeu
+ *     tags: [Game Results]
+ *     responses:
+ *       200:
+ *         description: Liste de tous les résultats de jeu
+ */
 router.get('/', gameResultController.getAllGameResults);
 
-// @route   GET api/game-results/:id
-// @desc    Obtenir un résultat de jeu par ID
-// @access  Public
+/**
+ * @swagger
+ * /api/game-results/{id}:
+ *   get:
+ *     summary: Obtenir un résultat de jeu par ID
+ *     tags: [Game Results]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID du résultat de jeu
+ *     responses:
+ *       200:
+ *         description: Informations du résultat de jeu
+ */
 router.get('/:id', gameResultController.getGameResultById);
 
-// @route   PUT api/game-results/:id
-// @desc    Mettre à jour un résultat de jeu
-// @access  Public
+/**
+ * @swagger
+ * /api/game-results/{id}:
+ *   put:
+ *     summary: Mettre à jour un résultat de jeu
+ *     tags: [Game Results]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID du résultat de jeu
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               score:
+ *                 type: number
+ *               gameId:
+ *                 type: string
+ *               profileId:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Résultat de jeu mis à jour
+ */
 router.put('/:id', gameResultController.updateGameResult);
 
-// @route   DELETE api/game-results/:id
-// @desc    Supprimer un résultat de jeu
-// @access  Public
+/**
+ * @swagger
+ * /api/game-results/{id}:
+ *   delete:
+ *     summary: Supprimer un résultat de jeu
+ *     tags: [Game Results]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID du résultat de jeu
+ *     responses:
+ *       200:
+ *         description: Résultat de jeu supprimé
+ */
 router.delete('/:id', gameResultController.deleteGameResult);
 
 module.exports = router;

@@ -1,0 +1,19 @@
+@startuml
+class User {
+    - username: String
+    - email: String
+    - password: String
+    - id: String
+
+    + User(username: String, email: String, password: String)
+    + getUsername(): String
+    + setUsername(username: String): void
+    + getEmail(): String
+    + setEmail(email: String): void
+    + getPassword(): String
+    + setPassword(password: String): void
+    + getId(): String
+    + setId(id: String): void
+    + toJSON(): String
+}
+@enduml

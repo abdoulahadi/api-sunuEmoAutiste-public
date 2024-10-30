@@ -2,34 +2,134 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 
-// @route   POST api/users/register
-// @desc    Register user
-// @access  Public
+/**
+ * @swagger
+ * /api/users/register:
+ *   post:
+ *     summary: Enregistrer un nouvel utilisateur
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Utilisateur enregistré avec succès
+ */
 router.post('/', userController.registerUser);
 
-// @route   POST api/users/login
-// @desc    Login user
-// @access  Public
+/**
+ * @swagger
+ * /api/users/login:
+ *   post:
+ *     summary: Connecter un utilisateur
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Utilisateur connecté avec succès
+ */
 router.post('/login', userController.loginUser);
 
-// @route   GET api/users/:id
-// @desc    Get user by ID
-// @access  Public
+/**
+ * @swagger
+ * /api/users/{id}:
+ *   get:
+ *     summary: Obtenir un utilisateur par ID
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de l'utilisateur
+ *     responses:
+ *       200:
+ *         description: Informations de l'utilisateur
+ */
 router.get('/:id', userController.getUserById);
 
-// @route   GET api/users
-// @desc    Get all users
-// @access  Public
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Obtenir tous les utilisateurs
+ *     tags: [Users]
+ *     responses:
+ *       200:
+ *         description: Liste de tous les utilisateurs
+ */
 router.get('/', userController.getAllUsers);
 
-// @route   PUT api/users/:id
-// @desc    Update user
-// @access  Public
+/**
+ * @swagger
+ * /api/users/{id}:
+ *   put:
+ *     summary: Mettre à jour un utilisateur
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de l'utilisateur
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Utilisateur mis à jour avec succès
+ */
 router.put('/:id', userController.updateUser);
 
-// @route   DELETE api/users/:id
-// @desc    Delete user
-// @access  Public
+/**
+ * @swagger
+ * /api/users/{id}:
+ *   delete:
+ *     summary: Supprimer un utilisateur
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de l'utilisateur
+ *     responses:
+ *       200:
+ *         description: Utilisateur supprimé avec succès
+ */
 router.delete('/:id', userController.deleteUser);
 
 module.exports = router;
